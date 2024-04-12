@@ -14,6 +14,3 @@ def home_function(app):
     def aadiswayam():
         return render_template('homepage/aadiswayam.html')
 
-    @homepage_blueprint.route('/fellowship')
-    def fellowship():
-        return render_template('homepage/fellowship.html')
