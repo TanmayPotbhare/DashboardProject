@@ -7,6 +7,10 @@ adiswayam_blueprint = Blueprint('adiswayam', __name__)
 
 def adiswayam_function(app):
     @adiswayam_blueprint.route('/aadiswayam', methods=['GET', 'POST'])
-    def adiswayam():
-        total_count = test()
-        return render_template('homepage/aadiswayam.html', total_count=total_count)
+    def aadiswayam():
+        total_count = total_candidates()
+        total_train_center = total_training_center()
+        total_train_partner = total_training_partner()
+        placed_data = placement_count()
+        return render_template('homepage/aadiswayam.html', total_count=total_count, total_train_center=total_train_center,
+                               total_train_partner=total_train_partner, placed_data=placed_data)

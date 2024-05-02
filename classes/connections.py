@@ -9,6 +9,7 @@ class FellowshipHost:
 
 class AdiswayamHost:
     def __init__(self):
+        self.central = '192.168.10.50'
         self.hostserver = '43.240.64.78'
         self.localserver = '127.0.0.1'
 

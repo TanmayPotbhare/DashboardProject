@@ -10,7 +10,3 @@ def home_function(app):
     def homepage():
         return render_template('homepage/homepage.html')
 
-    @homepage_blueprint.route('/aadiswayam')
-    def aadiswayam():
-        return render_template('homepage/aadiswayam.html')
-

@@ -1,9 +1,12 @@
 from flask import Flask
+import logging
 
 # import matplotlib_inline
 
 
 app = Flask(__name__)
+
+app.config['LOG_LEVEL'] = logging.DEBUG
 
 
 # -------------- Register Homepage Blueprints ---------------
