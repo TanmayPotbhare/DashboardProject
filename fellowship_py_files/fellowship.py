@@ -12,5 +12,5 @@ def fellowship_function(app):
         visitor_counts = visitor_count()
         current_count = current_year_count()
         accepted_count = accepted_year_count()
-        return render_template('homepage/fellowship.html', total_count=total_count, visitor_counts=visitor_counts,
+        return render_template('masterDash/fellowship.html', total_count=total_count, visitor_counts=visitor_counts,
                                current_count=current_count, accepted_count=accepted_count)

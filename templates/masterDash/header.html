@@ -1,0 +1,190 @@
+<!-- ======= Header ======= -->
+
+<div class="warli-bg w-100 bg-light">
+    <div class="container-fluid p-0  py-1 w-90">
+        <div class="header-logo-section container-fluid py-3 display-head">
+
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-4 d-flex align-items-center trti-logo-container">
+              <img src="/static/images/trti.png" class="w-100px" alt="TRTI Logo">
+            </div>
+
+            <div class="col-md-4 text-center">
+              <h5 class="fellowship-text trti-title">Intelligent Analytics <br>Dashboard</h5>
+            </div>
+
+            <div class="col-md-4 text-end">
+              <img src="/static/images/satyamev.png" alt="National Embleme" style="height:100px">
+              <img src="/static/images/maha-logo.png" alt="Maharashtra logo" style="height:120px">
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
+
+
+<header id="header" class="header sticky-top d-flex align-items-center justify-content-center">
+
+  <div>
+        <nav class="header-nav">
+            <ul class="d-flex align-items-center justify-content-center">
+              <div class="dropdown justify-content-left">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="navDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                  Projects
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="navDropdown">
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="/aadiswayam">
+                      Aadiswayam
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="/fellowship">
+                      Fellowship
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      C.P.E.T.P
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      Aadivan Mitra
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      Maha Tribes
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      T-Ambition
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      Sicklecell
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      MahaAdim
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      E-Tribe
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      F.R.A
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      Eklavya Kushal
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="dropdown-item" href="#">
+                      Adim Vikas
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/masterDash' else '' }}" href="/aadiswayam">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Master Dashboard</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/reports' else '' }}" href="#">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Reports</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/suggestions' else '' }}" href="/">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Suggestions</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="{{ url_for('logout') }}">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Logout</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/mahatribes' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">Maha Tribes</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/tambition' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">T-Ambition</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/sicklecell' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">Sicklecell</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/mahaadim' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">MahaAdim</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/etribe' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">E-Tribe</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/fra' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">F.R.A</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--      -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/eklavya' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">Eklavya Kushal</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+<!--              -->
+<!--              <li class="nav-item dropdown pe-3">-->
+<!--                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/adminvikas' else '' }}" href="#">-->
+<!--                  <span class="d-none d-md-block ps-2" style="font-size:17px">Adim Vikas</span>-->
+<!--                </a>&lt;!&ndash; End Profile Iamge Icon &ndash;&gt;-->
+<!--              </li>&lt;!&ndash; End Profile Nav &ndash;&gt;-->
+      
+              
+            </ul>
+        </nav><!-- End Icons Navigation -->
+  </div>
+
+</header><!-- End Header -->

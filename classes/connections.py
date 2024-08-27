@@ -37,7 +37,7 @@ class DatabaseConnection:
             host=self.host,
             database=self.database
         )
-        self.cursor = self.connection.cursor()
+        self.cursor = self.connection.cursor(dictionary=True)
 
     def execute_query(self, query):
         self.cursor.execute(query)

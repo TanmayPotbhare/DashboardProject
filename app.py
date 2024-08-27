@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template, flash
 import logging
 
 # import matplotlib_inline
 
 
 app = Flask(__name__)
+app.secret_key = '123456Dashboard'  # Replace with a strong, unique key
 
 app.config['LOG_LEVEL'] = logging.DEBUG
 
@@ -22,6 +23,12 @@ app.register_blueprint(homepage_blueprint)
 app.register_blueprint(fellowship_blueprint)
 app.register_blueprint(adiswayam_blueprint)
 # -----------------------------------------------------------
+
+
+@app.route('/logout')
+def logout():
+    flash('Logged Out Successfully', 'success')
+    return render_template('homepage/login.html')
 
 
 if __name__ == '__main__':

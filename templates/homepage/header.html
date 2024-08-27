@@ -1,0 +1,61 @@
+<!-- ======= Header ======= -->
+<div class="warli-bg w-100 bg-light">
+    <div class="container-fluid p-0  py-1 w-90">
+        <div class="header-logo-section container-fluid py-3 display-head">
+
+          <div class="row align-items-center justify-content-between">
+            <div class="col-md-4 d-flex align-items-center trti-logo-container">
+              <img src="/static/images/trti.png" class="w-100px" alt="TRTI Logo">
+            </div>
+
+            <div class="col-md-4 text-center">
+              <h5 class="fellowship-text trti-title">Intelligent Analytics Dashboard</h5>
+            </div>
+
+            <div class="col-md-4 text-end">
+              <img src="/static/images/satyamev.png" alt="National Embleme" style="height:100px">
+              <img src="/static/images/maha-logo.png" alt="Maharashtra logo" style="height:120px">
+            </div>
+          </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<header id="header" class="header sticky-top d-flex align-items-center justify-content-center">
+
+  <div>
+        <nav class="header-nav">
+            <ul class="d-flex align-items-center justify-content-center">
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/masterDash' else '' }}" href="/">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Home</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/reports' else '' }}" href="/contact">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Contact Us</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0 {{ 'active' if request.path == '/suggestions' else '' }}" href="/about">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">About Us</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+              <li class="nav-item dropdown pe-3">
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="/login">
+                  <span class="d-none d-md-block ps-2" style="font-size:17px">Login</span>
+                </a><!-- End Profile Iamge Icon -->
+              </li><!-- End Profile Nav -->
+
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+  </div>
+
+</header><!-- End Header -->

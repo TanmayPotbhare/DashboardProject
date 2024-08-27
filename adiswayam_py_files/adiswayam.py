@@ -12,5 +12,5 @@ def adiswayam_function(app):
         total_train_center = total_training_center()
         total_train_partner = total_training_partner()
         placed_data = placement_count()
-        return render_template('homepage/aadiswayam.html', total_count=total_count, total_train_center=total_train_center,
+        return render_template('masterDash/aadiswayam.html', total_count=total_count, total_train_center=total_train_center,
                                total_train_partner=total_train_partner, placed_data=placed_data)
