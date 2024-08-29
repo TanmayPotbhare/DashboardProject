@@ -1572,3 +1572,44 @@ body {
 }
 
 
+.footer-menu-group .footer-link {
+    display: block;
+    font-size: 14px;
+    padding: 5px 0;
+    color: #dcdcdc; /* Light gray color for the links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+    text-align: left;
+}
+
+.footer-menu-group .footer-link:hover {
+    color: #ffc107; /* Change to a lighter color on hover */
+}
+
+.footer-menu-group .footer-head-txt {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footer-menu-group .container-fluid {
+    padding: 20px 0;
+}
+
+.footer-menu-group .col-lg-4,
+.footer-menu-group .col-md-6 {
+    margin-bottom: 20px;
+}
+
+.footer-menu-group .textright {
+    color: #dcdcdc;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+
+
+
+

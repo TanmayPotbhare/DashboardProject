@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="static/NiceAdmin/assets/css/style.css" rel="stylesheet">
-  <link href="/static/sweetAlert.js" rel="js">
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -42,42 +42,50 @@
 <body>
 
 
-  {% include 'homepage/header.html' %}
-  {% include 'sweetalert.html' %}
+  {% include 'masterDash/header.html' %}
 
-  <main id="main" class="main">
 
-   <section class="hero">
-        <div class="login-container">
-          <form action="{{ url_for('homepage.submit_login') }}" method="POST" class="form-login">
-            <ul class="login-nav">
-              <li class="login-nav__item active">
-                <a href="#">Sign In</a>
-              </li>
-            </ul>
-            <label for="login-input-user" class="login__label">
-              Username
-            </label>
-            <input id="login-input-user" class="login__input" type="text" name="email"/>
-            <label for="login-input-password" class="login__label">
-              Password
-            </label>
-            <input id="login-input-password" class="login__input" type="password" name="password" />
-            <label for="login-sign-up" class="login__label--checkbox">
-              <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
-              Keep me Signed in
-            </label>
-            <a href="{{ url_for('homepage.submit_login') }}">
-              <button class="login__submit">Sign in</button>
-            </a>
+  <main>
+    <section class="hero py-5">
+      <div class="card container py-2">
+          <h5 class="fw-bold mb-3 mt-3">Please enter Suggestions or Errors you encountered</h5>
+          <form>
+              <div class="row">
+                <div class="form-label col-md-4">
+                  <label for="firstname">First Name</label>
+                  <input type="email" class="form-control" id="firstname" placeholder="Email">
+                </div>
+                <div class="form-label col-md-4">
+                  <label for="middlename">Middle Name</label>
+                  <input type="password" class="form-control" id="middlename" placeholder="Password">
+                </div>
+                <div class="form-label col-md-4 mb-3">
+                  <label for="surname">Surname</label>
+                  <input type="password" class="form-control" id="surname" placeholder="Password">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3">
+                  <label for="suggestions" class="form-label">Suggestions / Error Encountered</label>
+                  <textarea type="suggestions" class="form-control" id="suggestions"
+                            aria-describedby="emailHelp" name="suggestions" placeholder="Please enter suggestion or an error">
+                  </textarea>
+                </div>
+              </div>
+              <div>
+                <a href="#">
+                  <button class="btn btn-primary btn-sm">Submit</button>
+                </a>
+              </div>
           </form>
-          <a href="#" class="login__forgot">Forgot Password?</a>
-        </div>
-   </section>
+      </div>
+    </section>
+  </main>
 
-  </main><!-- End #main -->
 
-  {% include 'homepage/footer.html' %}
+  <!-- ======= Footer ======= -->
+  {% include 'masterDash/footer.html' %}
+  <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -94,9 +102,8 @@
   <!-- Template Main JS File -->
   <script src="static/NiceAdmin/assets/js/main.js"></script>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 </body>
 
 </html>
