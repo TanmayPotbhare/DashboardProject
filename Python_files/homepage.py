@@ -40,7 +40,15 @@ def home_function(app):
 
                 if email == username and password == password:
                     flash('Logged in Successfully.', 'success')
-                    return redirect(url_for('fellowship.fellowship'))
+                    return redirect(url_for('master.master_dashboard'))
 
         flash('Invalid Username and Password', 'error')
         return render_template('homepage/login.html')
+
+    @homepage_blueprint.route('/contact')
+    def contact():
+        return render_template('homepage/contact.html')
+
+    @homepage_blueprint.route('/about')
+    def about():
+        return render_template('homepage/about.html')
