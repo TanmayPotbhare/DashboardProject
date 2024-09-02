@@ -1608,6 +1608,13 @@ body {
     margin-bottom: 5px;
 }
 
+/* Genderwise Pie Chart for Fellowship Dashboard*/
+#fellowshipChart2 {
+  width: 70%; /* Responsive width */
+  max-width: 400px; /* Maximum width */
+  margin: auto;
+  height: auto; /* Auto height to maintain aspect ratio */
+}
 
 
 

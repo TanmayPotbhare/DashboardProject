@@ -204,51 +204,30 @@
             <!-- END VISITORS COUNT ON DASHBOARD -->
 
 
-            <!-- REJECTED CURRENT YEAR STUDENT  -->
-            <!-- <div class="col-xxl-3 col-xl-4">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title"><span>Rejected Current Year Student</span></h5>
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{ rejected_count }}</h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- END ACCEPTED CURRENT YEAR REJECTED STUDENT  -->
+          <!-- Start Charts -->
 
             <div class="container-fluid" style="background:white;">
               <div class="row">
-                <!--- Chart 1 --->
-                  <div class="col-md-6 mt-3">
-                      <div class="card dashboard-card" style="background:white;">
-                          <div class="card-body">
-                              <h5 class="card-title text-dark">Year wise Student Registration</h5>
-                              <canvas id="fellowshipChart1"></canvas>
-                          </div>
+
+                <!---Chart 1 Stacked Bar chart---> 
+                <div class="col-md-6 mt-3">
+                  <div class="card dashboard-card" style="background:white;">
+                    <div class="card-body">
+                      <h5 class="card-title text-dark">Year wise Student count by Gender</h5>
+                      <canvas id="fellowshipChart1"></canvas>
+                    </div>
+                
+                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                      <div class="dt-buttons btn-group flex-wrap">
+                        <button type="button" class="btn btn-primary btn-sm me-2 text-white" id="exportButton"> 
+                          <a href="#" class="text-white exportToExcel"><i class="bi bi-journal-arrow-down me-1"></i>Export to Excel</a>
+                        </button>
                       </div>
+                    </div>
                   </div>
-                <!--- Chart 2 --->
+                </div>  
+
+                <!--- Chart 2  Pie Chart--->
                   <div class="col-md-6 mt-3">
                       <div class="card dashboard-card" style="background:white;">
                           <div class="card-body">
@@ -260,56 +239,116 @@
               </div>
           </div>
 
-            <!--- Start Barchart --->
+
+
+
+          <!---Scripts for Chart starts from here -->
+
+          <!---Start Stacked Bar chart -->
+
+          <script>
+            const chartData = {
+              labels: ['2020', '2021', '2022', '2023', '2024'], // Labels for each bar
+              datasets: [
+                {
+                  label: 'Male',
+                  data: [{{ yr_twenty_count_male }}, {{ yr_twentyOne_count_male }}, {{ yr_twentyTwo_count_male }}, {{ yr_twentyThree_count_male }}, {{ yr_twentyFour_count_male }}], // Dynamic male values
+                  backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color for male bars
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1
+                },
+                {
+                  label: 'Female',
+                  data: [{{ yr_twenty_count_female }}, {{ yr_twentyOne_count_female }}, {{ yr_twentyTwo_count_female }}, {{ yr_twentyThree_count_female }}, {{ yr_twentyFour_count_female }}], // Dynamic female values
+                  backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color for female bars
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  borderWidth: 1
+                }
+              ]
+            };
           
+            // Bar chart configuration with stacked options
+            const config = {
+              type: 'bar',
+              data: chartData,
+              options: {
+                scales: {
+                  x: {
+                    stacked: true, // Enable stacking on x-axis
+                    title: {
+                      display: true,
+                      text: 'Year'  // X-axis label
+                    }
+                  },
+                  y: {
+                    stacked: true, // Enable stacking on y-axis
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Number of Registrations'  // Y-axis label
+                    }
+                  }
+                }
+              }
+            };
+          
+            document.addEventListener('DOMContentLoaded', () => {
+              const fellowshipChart1 = new Chart(
+                document.getElementById('fellowshipChart1'),
+                config
+              );
+            });
+          </script>
+          
+            <!-- END Stacked Bar Chart -->
+
+            <!-- Start Pie Chart - Gender wise Population  -->
+
             <script>
-              const chartData = {
-                  labels: [  '2020','2021','2022','2023','2024'], // Labels for each bar
+              const genderData = {
+                  labels: ['Female', 'Male', 'Other'],
                   datasets: [{
-                      label: 'Application Statistics',
-                      data: [ {{yr_twenty_count}}, {{yr_twentyOne_count}}, {{yr_twentyTwo_count}}, {{ current_count }}, {{ yr_twentyFour_count }}], // Dynamic values
-                      backgroundColor: [ 
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 99, 132, 0.2)'
+                      label: 'Student Count',
+                      data: [{{female_count}}, {{male_count}}, {{trans_count}}], // Dynamic values
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.6)',   // Color for Female
+                          'rgba(54, 162, 235, 0.6)',   // Color for Male
+                          'rgba(255, 206, 86, 0.6)'    // Color for Transgender
                       ],
                       borderColor: [
-                          'rgba(75, 192, 192, 1)',
+                          'rgba(255, 99, 132, 1)',
                           'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 99, 132, 1)'
+                          'rgba(255, 206, 86, 1)'
                       ],
                       borderWidth: 1
                   }]
               };
           
-              // Bar chart configuration
-              const config = {
-                  type: 'bar',
-                  data: chartData,
+              // Pie chart configuration
+              const pieConfig = {
+                  type: 'pie',
+                  data: genderData,
                   options: {
-                      scales: {
-                          y: {
-                              beginAtZero: true
+                      responsive: true,
+                      plugins: {
+                          legend: {
+                              position: 'top'
+                          },
+                          tooltip: {
+                              enabled: true
                           }
                       }
                   }
               };
           
-              // Render the chart
               document.addEventListener('DOMContentLoaded', () => {
-                  const fellowshipChart1 = new Chart(
-                      document.getElementById('fellowshipChart1'),
-                      config
+                  const fellowshipChart2 = new Chart(
+                      document.getElementById('fellowshipChart2'),
+                      pieConfig
                   );
               });
           </script>
-            <!-- End Barchart-->
-
-
+          <!-- End Pie Chart -->
 
             <!-- Reports -->
             <div class="col-12">
