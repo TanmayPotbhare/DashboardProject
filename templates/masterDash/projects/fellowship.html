@@ -30,7 +30,6 @@
   <link href="static/NiceAdmin/assets/css/style.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Sep 18 2023 with Bootstrap v5.3.2
@@ -214,19 +213,20 @@
                   <div class="card dashboard-card" style="background:white;">
                     <div class="card-body">
                       <h5 class="card-title text-dark">Year wise Student count by Gender</h5>
-                      <canvas id="fellowshipChart1"></canvas>
-                    </div>
-                
-                    <div class="dt-action-buttons text-end pt-3 pt-md-0">
-                      <div class="dt-buttons btn-group flex-wrap">
-                        <button type="button" class="btn btn-primary btn-sm me-2 text-white" id="exportButton"> 
-                          <a href="#" class="text-white exportToExcel"><i class="bi bi-journal-arrow-down me-1"></i>Export to Excel</a>
-                        </button>
+                      
+                      <!-- Start Export to Excel -->
+                      <div class="dt-action-buttons text-end pt-3 pt-md-0">
+                        <div class="dt-buttons btn-group flex-wrap">
+                          <button type="button" class="btn btn-primary btn-sm me-2 text-white" id="exportButton"> 
+                            <a href="#" class="text-white exportToExcel"><i class="bi bi-journal-arrow-down me-1"></i>Export to Excel</a>
+                          </button>
+                        </div>
                       </div>
+                      <!-- End Export to Excel -->
+                      <canvas id="fellowshipChart1"></canvas>
                     </div>
                   </div>
                 </div>  
-
                 <!--- Chart 2  Pie Chart--->
                   <div class="col-md-6 mt-3">
                       <div class="card dashboard-card" style="background:white;">
@@ -236,29 +236,60 @@
                           </div>
                       </div>
                   </div>
+
+                  <!---Chart 4 Stacked Bar chart By Application Status---> 
+                <div class="col-md-6 mt-3">
+                  <div class="card dashboard-card" style="background:white;">
+                      <div class="card-body">
+                          <h5 class="card-title text-dark">Year wise Student count by Application Status</h5>
+                          <canvas id="fellowshipChart4"></canvas>
+                      </div>
+                  </div>
+                </div> 
+
+                  <!--- Chart 3 Doughnut Chart--->
+                  <div class="col-md-6 mt-3">
+                    <div class="card dashboard-card" style="background:white;">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">Disability Wise Student Count By Gender</h5>
+                
+                            <!-- Gender Filter Dropdown -->
+                            <div class="form-group mb-3 col-sm-2">
+                                <label for="genderFilter">Select Gender:</label>
+                                <select class="form-control" id="genderFilter">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                
+                            <!-- Canvas for the Doughnut Chart -->
+                            <canvas id="fellowshipChart3"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
               </div>
           </div>
 
 
-
-
-          <!---Scripts for Chart starts from here -->
+        <!---Scripts for Chart starts from here -->
 
           <!---Start Stacked Bar chart -->
 
           <script>
-            const chartData = {
+            const genderChartData  = {
               labels: ['2020', '2021', '2022', '2023', '2024'], // Labels for each bar
               datasets: [
                 {
-                  label: 'Male',
+                  label: 'Male Students',
                   data: [{{ yr_twenty_count_male }}, {{ yr_twentyOne_count_male }}, {{ yr_twentyTwo_count_male }}, {{ yr_twentyThree_count_male }}, {{ yr_twentyFour_count_male }}], // Dynamic male values
                   backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color for male bars
                   borderColor: 'rgba(54, 162, 235, 1)',
                   borderWidth: 1
                 },
                 {
-                  label: 'Female',
+                  label: 'Female Students',
                   data: [{{ yr_twenty_count_female }}, {{ yr_twentyOne_count_female }}, {{ yr_twentyTwo_count_female }}, {{ yr_twentyThree_count_female }}, {{ yr_twentyFour_count_female }}], // Dynamic female values
                   backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color for female bars
                   borderColor: 'rgba(255, 99, 132, 1)',
@@ -270,7 +301,7 @@
             // Bar chart configuration with stacked options
             const config = {
               type: 'bar',
-              data: chartData,
+              data: genderChartData ,
               options: {
                 scales: {
                   x: {
@@ -302,18 +333,83 @@
           
             <!-- END Stacked Bar Chart -->
 
+          <!-- Start Stacked Bar chart for Application Status -->
+            <script>
+              // Pass data from Flask to JavaScript
+              const yr_twenty_count = {{ yr_twenty_count|tojson }};
+              const yr_twentyOne_count = {{ yr_twentyOne_count|tojson }};
+              const yr_twentyTwo_count = {{ yr_twentyTwo_count|tojson }};
+              const yr_twentythree_count = {{ yr_twentythree_count|tojson }};
+              const yr_twentyFour_count = {{ yr_twentyFour_count|tojson }};
+              function getCount(data, status) {
+                  return data[status] || 0; // Access the count directly from the object
+              }
+          
+              const statusChartData = {
+                  labels: ['2020', '2021', '2022', '2023', '2024'],
+                  datasets: [
+                      {
+                          label: 'Accepted',
+                          data: [
+                              getCount(yr_twenty_count, 'accepted'),
+                              getCount(yr_twentyOne_count, 'accepted'),
+                              getCount(yr_twentyTwo_count, 'accepted'),
+                              getCount(yr_twentythree_count, 'accepted'),
+                              getCount(yr_twentyFour_count, 'accepted')
+                          ],
+                          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                      },
+                      {
+                          label: 'Pending',
+                          data: [
+                              getCount(yr_twenty_count, 'pending'),
+                              getCount(yr_twentyOne_count, 'pending'),
+                              getCount(yr_twentyTwo_count, 'pending'),
+                              getCount(yr_twentythree_count, 'pending'),
+                              getCount(yr_twentyFour_count, 'pending')
+                          ],
+                          backgroundColor: 'rgba(255, 99, 132, 0.7)',
+                      }
+                  ]
+              };
+          
+              const statusChartConfig = {
+                  type: 'bar',
+                  data: statusChartData,
+                  options: {
+                      responsive: true,
+                      plugins: {
+                          legend: { position: 'top' },
+                          title: { display: true, text: 'Year-wise Student Count by Application Status' }
+                      },
+                      scales: {
+                          x: { stacked: true },
+                          y: { stacked: true }
+                      }
+                  }
+              };
+          
+              document.addEventListener('DOMContentLoaded', () => {
+                  const ctx = document.getElementById('fellowshipChart4').getContext('2d');
+                  new Chart(ctx, statusChartConfig);
+              });
+          </script>
+          
+          <!-- END Stacked Bar Chart for Application Status --> 
+
+
             <!-- Start Pie Chart - Gender wise Population  -->
 
             <script>
               const genderData = {
-                  labels: ['Female', 'Male', 'Other'],
+                  labels: ['Female Students', 'Male Students', 'Other Students'],
                   datasets: [{
                       label: 'Student Count',
-                      data: [{{female_count}}, {{male_count}}, {{trans_count}}], // Dynamic values
+                      data: [{{ gender_counts['Female'] }}, {{ gender_counts['Male'] }}, {{ gender_counts['Other'] }}], // Correct dynamic values
                       backgroundColor: [
                           'rgba(255, 99, 132, 0.6)',   // Color for Female
                           'rgba(54, 162, 235, 0.6)',   // Color for Male
-                          'rgba(255, 206, 86, 0.6)'    // Color for Transgender
+                          'rgba(255, 206, 86, 0.6)'    // Color for Other
                       ],
                       borderColor: [
                           'rgba(255, 99, 132, 1)',
@@ -349,6 +445,77 @@
               });
           </script>
           <!-- End Pie Chart -->
+           
+          <!-- Start Doughnut Chart -->
+              <script>
+                // Dynamic data from Flask/Python
+                const disabilityYesCount = {{ disabilityYes_count | tojson }};
+                const disabilityNoCount = {{ disabilityNo_count | tojson }};
+            
+                // Initial data for Male by default
+                const initialGender = 'Male';
+                const initialData = [disabilityYesCount[initialGender], disabilityNoCount[initialGender]];
+            
+                // Doughnut chart data configuration
+                const disabilityData = {
+                    labels: ['Disabled', 'Not Disabled'],
+                    datasets: [{
+                        label: 'Disability Distribution',
+                        data: initialData,
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.6)',
+                            'rgba(255, 99, 132, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+            
+                // Doughnut chart configuration
+                const doughnutConfig = {
+                    type: 'doughnut',
+                    data: disabilityData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (tooltipItem) {
+                                        const value = disabilityData.datasets[tooltipItem.datasetIndex].data[tooltipItem.dataIndex];
+                                        const total = disabilityData.datasets[tooltipItem.datasetIndex].data.reduce((acc, val) => acc + val, 0);
+                                        const percentage = ((value / total) * 100).toFixed(2);
+                                        return `${tooltipItem.label}: ${value} (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+            
+                // Render the initial chart
+                const fellowshipChart3 = new Chart(
+                    document.getElementById('fellowshipChart3'),
+                    doughnutConfig
+                );
+            
+                // Gender filter handling
+                document.getElementById('genderFilter').addEventListener('change', function () {
+                    const selectedGender = this.value;
+            
+                    // Update data based on selected gender
+                    disabilityData.datasets[0].data = [disabilityYesCount[selectedGender], disabilityNoCount[selectedGender]];
+            
+                    // Update the chart with new data
+                    fellowshipChart3.update();
+                });
+            </script>
+            <!-- End Doughnut Chart-->
 
             <!-- Reports -->
             <div class="col-12">

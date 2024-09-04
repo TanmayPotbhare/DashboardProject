@@ -1608,15 +1608,18 @@ body {
     margin-bottom: 5px;
 }
 
-/* Genderwise Pie Chart for Fellowship Dashboard*/
+/* Gender wise Pie Chart for Fellowship Dashboard*/
 #fellowshipChart2 {
   width: 70%; /* Responsive width */
-  max-width: 400px; /* Maximum width */
+  max-width: 470px; /* Maximum width */
   margin: auto;
   height: auto; /* Auto height to maintain aspect ratio */
 }
 
-
-
-
-
+/* Disability wise Doughnut Chart for Fellowship Dashboard*/
+#fellowshipChart3 {
+  width: 70%; /* Responsive width */
+  max-width: 370px; /* Maximum width */
+  margin: auto;
+  height: auto; /* Auto height to maintain aspect ratio */
+}

@@ -42,7 +42,7 @@ def applications_today():
         print(f"Unexpected Error: {e}")  
 
 
-# To fetch the count of Applications for current year 2023.
+# # To fetch the count of Applications for current year 2023.
 def current_year_count():
     host = FellowshipHost().hostserver
     query = " SELECT COUNT(*) as currentYearCount FROM application_page where phd_registration_year='2023' "
@@ -62,89 +62,135 @@ def current_year_count():
     except Exception as e:
         print(f"Error: {e}")
 
-
 # To fetch the count of Applications for year 2020.
 def twenty_count():
     host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) as twentyCount FROM application_page where phd_registration_year='2020' "
+    query = "SELECT final_approval, COUNT(*) as twentyCount FROM application_page WHERE phd_registration_year='2020' GROUP BY final_approval"
+    twenty_counts = {'accepted': 0, 'pending': 0}  # Initialize with default values
+    
     try:
         with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
             result = conn.execute_query(query)
             print(f"Result for 2020 year's count: {result}")
-            if result and isinstance(result[0], dict) and 'twentyCount' in result[0]:
-                #to fetch the value of key 'twentyCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['twentyCount']
-                print(f"Count : {count}") 
-                return count
+            if result:
+                for row in result:
+                    if row['final_approval'] in twenty_counts:
+                        twenty_counts[row['final_approval']] = row['twentyCount']
             else:
-                print("Unexpected result format from query.")  
+                print("No data found for counts of applicants from year 2020.")
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")
+    return twenty_counts
 
+def gender_count():
+    host = FellowshipHost().hostserver
+    query = "SELECT gender, COUNT(*) AS StudentGenderCount FROM application_page GROUP BY gender"
+    gender_counts = {'Male': 0, 'Female': 0, 'Other': 0}  # Initialize with default values
 
-# To fetch the count of Applications for year 2021.
+    try:
+        with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
+            result = conn.execute_query(query)
+            print(f"Result for gender counts: {result}")
+            if result:
+                for row in result:
+                    if row['gender'] in gender_counts:
+                        gender_counts[row['gender']] = row['StudentGenderCount']
+            else:
+                print("No data found for gender counts.")
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
+    return gender_counts 
+
+# To fetch the count of Applications for year 2021 by the application status.
 def twentyOne_count():
     host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) as twentyOneCount FROM application_page where phd_registration_year='2021' "
+    query = "SELECT final_approval, COUNT(*) as twentyOneCount FROM application_page WHERE phd_registration_year='2021' GROUP BY final_approval"
+    twentyOne_counts = {'accepted': 0, 'pending': 0}  # Initialize with default values
+    
     try:
         with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
             result = conn.execute_query(query)
             print(f"Result for 2021 year's count: {result}")
-            if result and isinstance(result[0], dict) and 'twentyOneCount' in result[0]:
-                #to fetch the value of key 'twentyOneCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['twentyOneCount']
-                print(f"Count : {count}") 
-                return count
+            if result:
+                for row in result:
+                    if row['final_approval'] in twentyOne_counts:
+                        twentyOne_counts[row['final_approval']] = row['twentyOneCount']
             else:
-                print("Unexpected result format from query.")  
+                print("No data found for counts of applicants from year 2021.")  
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")
+    
+    return twentyOne_counts
 
-
-# To fetch the count of Applications for year 2022.
+# To fetch the count of Applications for year 2022 by the application status.
 def twentyTwo_count():
     host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) as twentyTwoCount FROM application_page where phd_registration_year='2022' "
+    query = " SELECT final_approval, COUNT(*) as twentyTwoCount FROM application_page where phd_registration_year='2022' GROUP BY final_approval"
+    twentyTwo_counts = {'accepted': 0, 'pending': 0}  # Initialize with default values
     try:
         with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
             result = conn.execute_query(query)
             print(f"Result for 2022 year's count: {result}")
-            if result and isinstance(result[0], dict) and 'twentyTwoCount' in result[0]:
-                #to fetch the value of key 'twentyTwoCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['twentyTwoCount']
-                print(f"Count : {count}") 
-                return count
+            if result:
+                for row in result:
+                        if row['final_approval'] in twentyTwo_counts:
+                            twentyTwo_counts[row['final_approval']] = row['twentyTwoCount']
             else:
-                print("Unexpected result format from query.")  
+                print("No data found for counts of applicants from year 2022.")  
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")
+    return twentyTwo_counts    
+
+# To fetch the count of Applications for year 2023 by the application status.
+def twentyThree_count():
+    host = FellowshipHost().hostserver
+    query = " SELECT final_approval, COUNT(*) as twentyThreeCount FROM application_page where phd_registration_year='2023' GROUP BY final_approval"
+    twentyThree_counts = {'accepted': 0, 'pending': 0}  # Initialize with default values
+    try:
+        with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
+            result = conn.execute_query(query)
+            print(f"Result for 2023 year's count: {result}")
+            if result:
+                for row in result:
+                        if row['final_approval'] in twentyThree_counts:
+                            twentyThree_counts[row['final_approval']] = row['twentyThreeCount']
+            else:
+                print("No data found for counts of applicants from year 2022.")  
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
+    return twentyThree_counts 
 
 
-# To fetch the count of Applications for year 2024.
+# To fetch the count of Applications for year 2024 by the application status.
 def twentyFour_count():
     host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) as twentyFourCount FROM application_page where phd_registration_year='2024' "
+    query = " SELECT final_approval, COUNT(*) as twentyFourCount FROM application_page where phd_registration_year='2024' GROUP BY final_approval"
+    twentyFour_counts = {'accepted': 0, 'pending': 0}
     try:
         with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
             result = conn.execute_query(query)
             print(f"Result for 2024 year's count: {result}")
-            if result and isinstance(result[0], dict) and 'twentyFourCount' in result[0]:
-                #to fetch the value of key 'twentyFourCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['twentyFourCount']
-                print(f"Count : {count}") 
-                return count
+            if result:
+                for row in result:
+                    if row['final_approval'] in twentyFour_counts:
+                        twentyFour_counts[row['final_approval']] = row['twentyFourCount']
             else:
-                print("Unexpected result format from query.")  
+                print("No data found for counts of applicants from year 2024.")  
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")
+    return twentyFour_counts
 
 # To fetch the count of Accepted applications for current year 2023.
 def accepted_year_count():
@@ -166,8 +212,6 @@ def accepted_year_count():
     except Exception as e:
         print(f"Error: {e}")
 
-
-
 # To fetch the count of Rejected applications for current year 2023.
 def rejected_year_count():
     host = FellowshipHost().hostserver
@@ -188,46 +232,27 @@ def rejected_year_count():
     except Exception as e:
         print(f"Error: {e}")        
 
-
-# To fetch the count of Male Applicants
-def male_student_count():
+# To fetch the Gender wise count of all applications
+def gender_count():
     host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) maleStudentCount FROM application_page where gender = 'male' "
+    query = "SELECT gender, COUNT(*) AS StudentGenderCount FROM application_page GROUP BY gender"
+    gender_counts = {'Male': 0, 'Female': 0, 'Other': 0}  # Initialize with default values
+
     try:
         with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
             result = conn.execute_query(query)
-            print(f"Result for Male candidates count: {result}")
-            if result and isinstance(result[0], dict) and 'maleStudentCount' in result[0]:
-                #to fetch the value of key 'maleStudentCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['maleStudentCount']
-                print(f"Count : {count}") 
-                return count
+            print(f"Result for gender counts: {result}")
+            if result:
+                for row in result:
+                    if row['gender'] in gender_counts:
+                        gender_counts[row['gender']] = row['StudentGenderCount']
             else:
-                print("Unexpected result format from query.")  
-    except mysql.connector.Error as e:
-        print(f"MySQL Error: {e}")
-    except Exception as e:
-        print(f"Error: {e}")          
-
-# To fetch the count of Female Applicants
-def female_student_count():
-    host = FellowshipHost().hostserver
-    query = " SELECT COUNT(*) femaleStudentCount FROM application_page where gender = 'female' "
-    try:
-        with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
-            result = conn.execute_query(query)
-            print(f"Result for Female candidates count: {result}")
-            if result and isinstance(result[0], dict) and 'femaleStudentCount' in result[0]:
-                #to fetch the value of key 'femaleStudentCount' from dict 'result[0]' of list 'result'.
-                count = result[0]['femaleStudentCount']
-                print(f"Count : {count}") 
-                return count
-            else:
-                print("Unexpected result format from query.")  
+                print("No data found for gender counts.")
     except mysql.connector.Error as e:
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")
+    return gender_counts                 
 
 # To fetch the count of Male Applicants in year 2020
 def male_twenty_count():
@@ -429,3 +454,45 @@ def female_twentyFour_count():
         print(f"MySQL Error: {e}")
     except Exception as e:
         print(f"Error: {e}")     
+
+# To fetch the count of Total disable Applicants.
+def disability_yes_count():
+    host = FellowshipHost().hostserver
+    query = "SELECT  gender,COUNT(*) as disabiltyYesCount FROM application_page WHERE disability='Yes' GROUP BY gender"
+    disabilityYes_counts = {'Male': 0, 'Female': 0, 'Other':0 }
+    try:
+        with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
+            result = conn.execute_query(query)
+            print(f"Result for Candidates with disability: {result}")
+            if result:
+                for row in result:
+                    if row['gender'] in disabilityYes_counts:
+                        disabilityYes_counts[row['gender']] = row['disabiltyYesCount']
+            else:
+                print("No data found for counts of applicants with disability.") 
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}") 
+    return disabilityYes_counts                 
+
+# To fetch the count of Total Applicants without disability.
+def disability_no_count():
+    host = FellowshipHost().hostserver
+    query = "SELECT  gender, COUNT(*) as disabiltyNoCount FROM application_page WHERE disability='No' GROUP BY gender"
+    disabilityNo_counts = {'Male': 0, 'Female': 0, 'Other':0 }
+    try:
+        with DatabaseConnection(host, 'root', 'A9CALcsd7lc%7ac', 'ICSApplication') as conn:
+            result = conn.execute_query(query)
+            print(f"Result for Candidates without disability: {result}")
+            if result:
+                for row in result:
+                    if row['gender'] in disabilityNo_counts:
+                        disabilityNo_counts[row['gender']] = row['disabiltyNoCount']
+            else:
+                print("No data found for counts of applicants without disability.") 
+    except mysql.connector.Error as e:
+        print(f"MySQL Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}") 
+    return disabilityNo_counts   
